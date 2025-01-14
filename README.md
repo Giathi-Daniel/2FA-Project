@@ -1,7 +1,3 @@
-Here’s how you can write the **README.md** file in **Visual Studio Code**:
-
----
-
 ### **Steps to Create and Write the README in VS Code**
 
 1. **Create the README File**:  
