@@ -1,14 +1,3 @@
-### **Steps to Create and Write the README in VS Code**
-
-1. **Create the README File**:  
-   - Open the project folder in **VS Code**.
-   - Right-click on the folder or the workspace area in the File Explorer and select **New File**.
-   - Name the file `README.md`.
-
-2. **Write the Content**:  
-   Copy the following content into the `README.md` file:
-
-```markdown
 # **2FA Authentication System**
 
 ## **Overview**
@@ -44,33 +33,6 @@ A secure and modern two-factor authentication (2FA) system built using **HTML**,
   - Random 2FA code generation.
 - **Testing**: Unit testing with **Jest**.
 
----
-
-## **Project Structure**
-
-```plaintext
-/backend
-├── config/            # Database and environment setup
-├── controllers/       # Core authentication and user logic
-├── middleware/        # Authentication and route protection
-├── models/            # Mongoose schemas
-├── routes/            # API routes
-├── utils/             # Helper functions (email, code generation)
-├── validators/        # Input validation logic
-├── views/             # Email templates
-├── test/              # Unit tests
-├── server.js          # Main server file
-/frontend
-├── assets/            # Images, icons, and fonts
-├── styles/            # Tailwind CSS setup
-├── scripts/           # Core JS logic (login, registration, 2FA)
-├── index.html         # Landing page
-├── register.html      # User registration page
-├── login.html         # User login page
-├── 2fa.html           # 2FA code verification page
-```
-
----
 
 ## **How to Run**
 
