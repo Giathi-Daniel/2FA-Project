@@ -3,6 +3,10 @@
 ## **Overview**
 A secure and modern two-factor authentication (2FA) system built using **HTML**, **CSS (Tailwind)**, **JavaScript**, and **Node.js**. This project demonstrates a stylish, responsive user interface combined with a robust backend, ensuring advanced security standards and a seamless user experience.
 
+
+![register](./assets/images/register.png)
+![login](./assets/images/login.png)
+
 ---
 
 ## **Features**

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure 2FA - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Glassmorphism styles */
+    .glass {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Ripple effect for buttons */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple::after {
+      content: '';
+      position: absolute;
+      inline-size: 100%;
+      block-size: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10%);
+      background-position: center;
+      transform: scale(0);
+      opacity: 0.75;
+      transition: transform 0.4s, opacity 0.4s;
+    }
+
+    .ripple:hover::after {
+      transform: scale(4);
+      opacity: 0;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex justify-center items-center p-6">
+  <!-- Login Card -->
+  <div class="glass p-8 max-w-md w-full">
+    <h2 class="text-3xl font-bold text-center text-blue-500 mb-6">Welcome Back</h2>
+    <form id="loginForm" class="space-y-6">
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-800 dark:text-gray-300">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="w-full px-4 py-2 bg-transparent border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-800 dark:text-gray-300">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="w-full px-4 py-2 bg-transparent border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="ripple w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-400 transition duration-300"
+      >
+        Login
+      </button>
+    </form>
+
+    <!-- Send 2FA Code Button -->
+    <div class="mt-4 text-center">
+      <button
+        id="send2FACode"
+        class="ripple px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-400 transition duration-300"
+      >
+        Send 2FA Code
+      </button>
+    </div>
+
+    <p class="text-center mt-4 text-sm text-gray-700 dark:text-gray-300">
+      Don’t have an account? <a href="register.html" class="text-blue-500 hover:underline">Sign up here</a>
+    </p>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById('loginForm');
+    const send2FACode = document.getElementById('send2FACode');
+
+    // Mock login event
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Logging in...');
+    });
+
+    // Mock 2FA code sending
+    send2FACode.addEventListener('click', () => {
+      alert('2FA code sent to your registered email!');
+    });
+  </script>
+</body>
+</html>
