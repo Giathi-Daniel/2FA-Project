@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure 2FA - Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Glassmorphism styles */
+    .glass {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Password strength meter */
+    .strength-bar div {
+      block-size: 6px;
+      border-radius: 4px;
+      margin-inline-end: 4px;
+      transition: all 0.3s ease;
+    }
+
+    /* Tooltip styling */
+    .tooltip {
+      display: none;
+      position: absolute;
+      background-color: #ff6b6b;
+      color: white;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+      inset-block-start: -30px;
+      inset-inline-start: 0;
+    }
+
+    input:focus + .tooltip {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex justify-center items-center p-6">
+  <!-- Registration Card -->
+  <div class="glass p-8 max-w-md w-full">
+    <h2 class="text-3xl font-bold text-center text-blue-500 mb-6">Create Your Account</h2>
+    <form id="registrationForm" class="space-y-6">
+      <!-- Email Field -->
+      <div class="relative">
+        <label for="email" class="block text-sm font-medium text-gray-800 dark:text-gray-300">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="w-full px-4 py-2 bg-transparent border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter your email"
+          required
+        />
+        <span class="tooltip">Invalid email format</span>
+      </div>
+
+      <!-- Password Field -->
+      <div class="relative">
+        <label for="password" class="block text-sm font-medium text-gray-800 dark:text-gray-300">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="w-full px-4 py-2 bg-transparent border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter your password"
+          required
+        />
+        <span class="tooltip">Password must be at least 8 characters</span>
+        <!-- Strength Meter -->
+        <div class="strength-bar mt-2 flex">
+          <div class="bg-gray-300 flex-1"></div>
+          <div class="bg-gray-300 flex-1"></div>
+          <div class="bg-gray-300 flex-1"></div>
+          <div class="bg-gray-300 flex-1"></div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-400 transition duration-300"
+      >
+        Register
+      </button>
+    </form>
+
+    <p class="text-center mt-4 text-sm text-gray-700 dark:text-gray-300">
+      Already have an account? <a href="login.html" class="text-blue-500 hover:underline">Login here</a>
+    </p>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const passwordInput = document.getElementById('password');
+    const strengthBar = document.querySelector('.strength-bar');
+    const tooltip = document.querySelector('.tooltip');
+
+    // Password  validation
+    passwordInput.addEventListener('input', () => {
+      const value = passwordInput.value;
+      const bars = strengthBar.children;
+      const strength = getStrength(value);
+
+      // Reset bar colors
+      Array.from(bars).forEach((bar, index) => {
+        bar.classList.remove('bg-red-500', 'bg-yellow-500', 'bg-green-500');
+        if (index < strength) {
+          if (strength <= 2) bar.classList.add('bg-red-500');
+          else if (strength === 3) bar.classList.add('bg-yellow-500');
+          else bar.classList.add('bg-green-500');
+        }
+      });
+
+      tooltip.style.display = value.length < 8 ? 'block' : 'none';
+    });
+
+    function getStrength(password) {
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[a-z]/.test(password)) score++;
+      if (/\d/.test(password)) score++;
+      return score;
+    }
+  </script>
+</body>
+</html>
