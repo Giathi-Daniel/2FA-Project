@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure 2FA - Verification</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Glassmorphism styles */
+    .glass {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Success and error animations */
+    .success-checkmark {
+      display: none;
+      inline-size: 50px;
+      block-size: 50px;
+      border-radius: 50%;
+      background: #4caf50;
+      position: relative;
+      animation: popIn 0.3s ease-in-out;
+    }
+
+    .success-checkmark::before {
+      content: '';
+      position: absolute;
+      inset-block-start: 18px;
+      inset-inline-start: 12px;
+      inline-size: 20px;
+      block-size: 5px;
+      border-radius: 5px;
+      background: white;
+      transform: rotate(-45deg);
+    }
+
+    .success-checkmark::after {
+      content: '';
+      position: absolute;
+      inset-block-start: 10px;
+      inset-inline-start: 23px;
+      inline-size: 10px;
+      block-size: 5px;
+      border-radius: 5px;
+      background: white;
+      transform: rotate(45deg);
+    }
+
+    .error-shake {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-5px);
+      }
+      50% {
+        transform: translateX(5px);
+      }
+      75% {
+        transform: translateX(-5px);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex justify-center items-center p-6">
+  <!-- Verification Card -->
+  <div class="glass p-8 max-w-md w-full text-center">
+    <h2 class="text-3xl font-bold text-blue-500 mb-6">2FA Verification</h2>
+    <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">
+      Enter the 6-digit code sent to your email to continue.
+    </p>
+    <form id="verificationForm" class="space-y-6">
+      <!-- 2FA Code Input -->
+      <div>
+        <input
+          type="text"
+          id="verificationCode"
+          maxlength="6"
+          class="w-full px-4 py-2 text-center bg-transparent border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter 6-digit code"
+          required
+        />
+      </div>
+
+      <!-- Verify Button -->
+      <button
+        type="submit"
+        class="ripple w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-400 transition duration-300"
+      >
+        Verify Code
+      </button>
+    </form>
+
+    <!-- Feedback -->
+    <div id="feedback" class="mt-4">
+      <div id="success" class="success-checkmark mx-auto"></div>
+      <div id="error" class="hidden text-red-500 mt-2">Invalid code. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById('verificationForm');
+    const feedback = document.getElementById('feedback');
+    const success = document.getElementById('success');
+    const error = document.getElementById('error');
+    const input = document.getElementById('verificationCode');
+
+    // Mock 2FA Verification
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = input.value.trim();
+
+      // Mock successful code
+      if (code === '123456') {
+        success.style.display = 'block';
+        error.classList.add('hidden');
+        input.classList.remove('error-shake');
+
+        setTimeout(() => {
+          alert('Code verified successfully!');
+          window.location.href = 'dashboard.html'; // Redirect after success
+        }, 1000);
+      } else {
+        success.style.display = 'none';
+        error.classList.remove('hidden');
+        input.classList.add('error-shake');
+      }
+    });
+  </script>
+</body>
+</html>
