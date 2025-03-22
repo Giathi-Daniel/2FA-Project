@@ -7,7 +7,6 @@ A secure and modern two-factor authentication (2FA) system built using **HTML**,
 ![register](./assets/images/register.png)
 ![login](./assets/images/login.png)
 
----
 
 ## **Features**
 
@@ -89,8 +88,5 @@ Pull requests are welcome! For significant changes, open an issue to discuss you
 ```
 
 ---
-
-### **Save the File**  
-Press `Ctrl + S` (Windows/Linux) or `Cmd + S` (Mac) to save the file. 
 
 You can preview the markdown by right-clicking the file in VS Code and selecting **Open Preview** or pressing `Ctrl+Shift+V`.
