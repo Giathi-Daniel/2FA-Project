@@ -1,4 +1,4 @@
-const rateLimit = require('express-rate-limi')
+const rateLimit = require('express-rate-limit')
 const helmet = require('helmet')
 
 const securityMiddleware = [
