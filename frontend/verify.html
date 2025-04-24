@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure 2FA - Verify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .otp-input {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+        text-align: center;
+        border-radius: 0.5rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-100 dark:bg-gray-900 min-h-screen flex justify-center items-center p-6 overflow-x-hidden"
+  >
+    <!-- Verification Card -->
+    <div class="glass p-8 max-w-sm sm:max-w-md lg:max-w-lg w-full">
+      <h2 class="text-3xl font-bold text-center text-blue-500 mb-6">
+        Two-Factor Authentication
+      </h2>
+      <p class="text-center text-gray-700 dark:text-gray-300 mb-6">
+        A verification code has been sent to<br />
+        <span id="userEmail" class="font-semibold">user@example.com</span>
+      </p>
+
+      <!-- OTP Input -->
+      <div class="flex justify-center mb-8" id="otpContainer">
+        <input
+          type="text"
+          maxlength="1"
+          class="otp-input border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          data-index="1"
+          autofocus
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="otp-input border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          data-index="2"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="otp-input border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          data-index="3"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="otp-input border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          data-index="4"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="otp-input border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          data-index="5"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="otp-input border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          data-index="6"
+        />
+      </div>
+
+      <!-- Timer -->
+      <div class="text-center mb-6">
+        <p id="timer" class="text-gray-600 dark:text-gray-400">00:30</p>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-center space-x-4">
+        <button
+          id="resendBtn"
+          class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
+          disabled
+        >
+          Resend Code
+        </button>
+        <button
+          id="verifyBtn"
+          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-400 transition-colors"
+        >
+          Verify
+        </button>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src=""></script>
+    <script src="2fa.js"></script>
+  </body>
+</html>
