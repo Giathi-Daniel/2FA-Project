@@ -33,4 +33,30 @@ const sendOTPEmail = async (email, otp) => {
     }
 }
 
-module.exports = { sendOTPEmail }
+
+const sendPasswordResetEmail = async (email, token) => {
+    try {
+      await transporter.sendMail({
+        from: `Secure2FA <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: 'Password Reset Request',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-inline-size: 600px; margin: 0 auto;">
+            <h2 style="color: #2563eb;">Password Reset</h2>
+            <p>Click the link below to reset your password:</p>
+            <a href="${process.env.CLIENT_URL}/reset-password/${token}" 
+               style="display: inline-block; padding: 10px 20px; background-color: #2563eb; 
+                      color: white; text-decoration: none; border-radius: 5px; margin: 20px 0;">
+              Reset Password
+            </a>
+            <p>This link will expire in 10 minutes.</p>
+          </div>
+        `
+      });
+    } catch (err) {
+      console.error('Password reset email error:', err);
+      throw new Error('Failed to send password reset email');
+    }
+};
+  
+module.exports = { sendOTPEmail, sendPasswordResetEmail };
