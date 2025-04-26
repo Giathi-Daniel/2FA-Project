@@ -9,9 +9,10 @@ const authMiddleware = require('../middleware/authMiddleware');
 //   res.json(req.user);
 // });
 
-// Updated routes with validation middleware
+// Routes with validation middleware
 router.post(
   '/register',
+  csrfProtection,
   [
     check('email').isEmail().normalizeEmail(),
     check('password').isLength({ min: 8 })
@@ -22,6 +23,7 @@ router.post(
 
 router.post(
   '/login',
+  csrfProtection,
   [
     check('email').isEmail().normalizeEmail(),
     check('password').exists()
@@ -32,6 +34,7 @@ router.post(
 
 router.post(
   '/forgot-password',
+  csrfProtection,
   [check('email').isEmail().normalizeEmail()],
   validateRequest,
   authController.forgotPassword
