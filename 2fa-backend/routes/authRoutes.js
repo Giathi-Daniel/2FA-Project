@@ -1,24 +1,48 @@
-const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
 const authController = require('../controllers/authController');
+const validateRequest = require('../middleware/validationMiddleware');
+const authMiddleware = require('../middleware/authMiddleware');
 
+// Protected route 
+// router.get('/profile', authMiddleware.protect, (req, res) => {
+//   res.json(req.user);
+// });
+
+// Routes with validation middleware
 router.post(
   '/register',
+  csrfProtection,
   [
     check('email').isEmail().normalizeEmail(),
     check('password').isLength({ min: 8 })
   ],
+  validateRequest,
   authController.register
 );
 
 router.post(
-  '/verify',
+  '/login',
+  csrfProtection,
   [
     check('email').isEmail().normalizeEmail(),
-    check('otp').isLength({ min: 6, max: 6 })
+    check('password').exists()
   ],
-  authController.verifyOTP
+  validateRequest,
+  authController.login
 );
 
-module.exports = router;
+router.post(
+  '/forgot-password',
+  csrfProtection,
+  [check('email').isEmail().normalizeEmail()],
+  validateRequest,
+  authController.forgotPassword
+);
+
+router.put(
+  '/reset-password/:token',
+  [check('password').isLength({ min: 8 })],
+  validateRequest,
+  authController.resetPassword
+);
