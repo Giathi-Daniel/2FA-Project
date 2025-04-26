@@ -86,7 +86,3 @@ This project is open-source and available under the [MIT License](LICENSE).
 ## **Contributing**
 Pull requests are welcome! For significant changes, open an issue to discuss your ideas.
 ```
-
----
-
-You can preview the markdown by right-clicking the file in VS Code and selecting **Open Preview** or pressing `Ctrl+Shift+V`.
