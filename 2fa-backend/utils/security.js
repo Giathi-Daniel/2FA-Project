@@ -14,7 +14,19 @@ const csrfProtection = csrf({
 });
 
 const securityMiddleware = [
-  helmet(),
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:"],
+        connectSrc: ["'self'"],
+        fontSrc: ["'self'"],
+        objectSrc: ["'none'"]
+      }
+    }
+  }),
   rateLimit({
     windowMs: process.env.RATE_LIMIT_WINDOW * 60 * 1000,
     max: process.env.RATE_LIMIT_MAX
